@@ -81,19 +81,6 @@ ideas = {
                 factor = 0
             }
         }
-        SCA_fernando_manriquez = {
-
-            picture = generic_political_advisor_europe_3
-
-            allowed = {
-                original_tag = SCA
-            }
-
-            traits = { head_of_intelligence }
-            ai_will_do = {
-                factor = 0
-            }
-        }
     }
 	air_chief = {
 
@@ -417,7 +404,7 @@ ideas = {
             }
         }
 
-        SCA_esteban_ricardo = {
+        SCA_estban_ricardo = {
             picture = generic_army_europe_2
 
             allowed = {
@@ -576,74 +563,6 @@ ideas = {
 				production_speed_arms_factory_factor = -0.10
 				justify_war_goal_time = -0.4
 				generate_wargoal_tension = -1
-			}
-		}
-        SCA_cavalrised_army = {
-
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-			picture = Horse
-			
-			modifier = {
-                land_reinforce_rate = -0.01
-                army_speed_factor = -0.25
-                planning_speed = -0.3
-			}
-		}
-        SCA_motorised_army = {
-
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-			picture = truck
-			
-			modifier = {
-                land_reinforce_rate = 0.02
-                army_speed_factor = -0.10
-                planning_speed = -0.25
-			}
-		}
-        SCA_mechanized_army = {
-
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-			picture = truck
-			
-			modifier = {
-                land_reinforce_rate = 0.02
-                army_speed_factor = -0.05
-                planning_speed = 0.05
-			}
-		}
-        SCA_combined_arms = {
-
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-			picture = Gold Tire
-			
-			modifier = {
-                land_reinforce_rate = 0.02
-                army_speed_factor = 0.10
-                planning_speed = 0.15
 			}
 		}
 }

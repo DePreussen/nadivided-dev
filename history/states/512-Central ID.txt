@@ -5,14 +5,11 @@ state={
 	provinces={
 		2417 2427 3730 3731 3732 3736 3741 
 	}
-	resources = {
-		chromium=56.000
-		tungsten=22.000
-	}
+	
 	history={
 		owner = SID
 		buildings = {
-			infrastructure = 3
+			infrastructure = 4
 		}
 		add_core_of = SID
 		#add_claim_by = PCA
@@ -37,7 +34,7 @@ state={
 		}
 	}
 	
-	manpower=19030
+	manpower=10000
 	buildings_max_level_factor=1.000
 	state_category=rural
 }

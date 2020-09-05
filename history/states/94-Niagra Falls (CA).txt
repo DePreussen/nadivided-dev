@@ -12,7 +12,7 @@ state={
 
 		}
 		add_core_of = PON
-		add_claim_by = SNY
+		add_core_of = SNY
 		victory_points = {
 			3539 3 
 		}

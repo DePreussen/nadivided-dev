@@ -15,12 +15,6 @@ bookmarks = {
 		"SPA"={
 			history = "OTHER_GATHERING_STORM_DESC"
 			ideology = neutrality
-			focuses = {
-				SPA_deal_with_the_stikes
-			}
-			ideas = {
-				SPA_widespread_strikes
-			}
 		}
 		
 		"SCA"={
@@ -48,11 +42,6 @@ bookmarks = {
 			}
 		}
 		
-		"MDC"={
-			history = "OTHER_GATHERING_STORM_DESC"
-			ideology = neutrality
-		}
-		
 		"PON"={
 			history = "PON_GATHERING_STORM_DESC"
 			ideology = neutrality
@@ -66,6 +55,10 @@ bookmarks = {
 			}
 		}
 		
+		"PQC"={
+			history = "OTHER_GATHERING_STORM_DESC"
+			ideology = neutrality
+		}
 		
 		"---"={
 			history = "OTHER_GATHERING_STORM_DESC"
@@ -130,7 +123,7 @@ bookmarks = {
 				ORE_roaming_commies
 			}
 			focuses = {
-				SOR_load_in_tree
+				 SOR_load_in_tree
 			}
 		}
 
@@ -191,24 +184,14 @@ bookmarks = {
 				SGA_kingcottonsknights
 			}
 		}
-		"SLA" = {
+		"SOH" = {
 			minor = yes
 			history = "OTHER_GATHERING_STORM_DESC"
 			ideology = neutrality
 			focuses = {
-				SLA_elect_huey_long
-			}
-		}
-		"GRE" = {
-			minor = yes
-			history = "OTHER_GATHERING_STORM_DESC"
-			ideology = neutrality
-			ideas = {
-				GRE_isolation
-				GRE_strained_resources
-			}
-			focuses = {
-
+				SOH_the_gang
+				SOH_cores
+				SOH_naval_ohio
 			}
 		}
 		

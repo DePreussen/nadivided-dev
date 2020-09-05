@@ -5,19 +5,11 @@ state={
 	provinces={
 		2500 2579 3735 3737 3742 
 	}
-	resources = {
-		steel = 36
-		tungsten = 2
-		aluminium = 8
-		chromium = 30
-	}
+	
 	history={
 		owner = SID
 		buildings = {
-			infrastructure = 7
-			industrial_complex = 2
-			arms_factory = 1
-			air_base = 4
+			infrastructure = 4
 		}
 		add_core_of = SID
 		victory_points = {
@@ -33,7 +25,7 @@ state={
 		#add_claim_by = URO
 	}
 	
-	manpower=210889
+	manpower=10000
 	buildings_max_level_factor=1.000
-	state_category=city
+	state_category=rural
 }

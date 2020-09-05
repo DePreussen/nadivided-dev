@@ -4,10 +4,6 @@ state={
 	provinces={
 		86 
 	}
-	resources={
-		tungsten=1
-		steel=19
-	}
 	history = {
 		owner = SID
 		add_core_of = SID

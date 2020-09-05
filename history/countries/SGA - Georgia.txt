@@ -60,10 +60,6 @@ if = {
 
 set_convoys = 30
 
-add_ideas = {
-	SLA_hueys_influence
-}
-
 set_politics = {
 	ruling_party = democratic
 	last_election = "1936.1.1"
@@ -80,7 +76,7 @@ set_popularities = {
 create_country_leader = {
 	
 	name = "Ed Rivers"
-	picture = "Portrait_Georgia_democratic_leader.dds"
+	picture = "Portrait_GA_Ed_Rivers.dds"
 	expire = "1965.1.1"
 	ideology = conservatism
 	traits = {
@@ -148,7 +144,7 @@ create_corps_commander = {
 
 	attack_skill = 1
 	defense_skill = 1
-	planning_skill = 1
+	planning_skill = 2
 	logistics_skill = 1
 }
 
@@ -192,7 +188,7 @@ create_navy_leader = {
 }
 create_corps_commander = {
 	name = "Courtney Hicks Hodges"
-	picture = "gfx_SGA_general_courtney_hicks_hodges.dds"
+	picture = "gfx_leaders_SGA_general_courtney_hicks_hodges.dds"
 	traits = {
 		#
 	}

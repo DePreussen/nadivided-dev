@@ -34,7 +34,6 @@
  
  VICTORY_POINTS_2078:0 "Philadephia"
  VICTORY_POINTS_2156:0 "Pittsburgh"
- VICTORY_POINTS_2103:0 "Harrisburg"
  
  VICTORY_POINTS_3469:0 "Trenton"
  
@@ -87,9 +86,10 @@
  VICTORY_POINTS_2765:0 "Bismarck"
  VICTORY_POINTS_2580:0 "Pierre"
  VICTORY_POINTS_2096:0 "Lincoln"
+ VICTORY_POINTS_1506:0 "Oklahoma City"
 
- VICTORY_POINTS_1022:0 "Jacksonville"
- VICTORY_POINTS_851:0 "Tampa"
+ VICTORY_POINTS_1003:0 "New Orleans"
+ VICTORY_POINTS_1058:0 "Baton Rouge"
  VICTORY_POINTS_1737:0 "Atlanta"
  VICTORY_POINTS_1657:0 "Savannah"
  VICTORY_POINTS_1256:0 "Charleston"
@@ -377,33 +377,18 @@
  VICTORY_POINTS_4100:0 "Nuevitas"
  VICTORY_POINTS_1268:0 "Hamilton"
 
- #------------------------------#
- #          Louisiana           #
- #------------------------------#
- VICTORY_POINTS_1003:0 "New Orleans"
- VICTORY_POINTS_4569:0 "Baton Rouge"
- VICTORY_POINTS_1058:0 "St Francisville"
- VICTORY_POINTS_1059:0 "Slidell"
- VICTORY_POINTS_5928:0 "Metairie"
- VICTORY_POINTS_4571:0 "Houma"
- VICTORY_POINTS_2097:0 "Morgan City"
- VICTORY_POINTS_2125:0 "New Iberia"
- VICTORY_POINTS_5936:0 "Lafayette"
- VICTORY_POINTS_2563:0 "Lake Charles"
- VICTORY_POINTS_5960:0 "Shreveport"
- VICTORY_POINTS_5958:0 "Bossier City"
- VICTORY_POINTS_2870:0 "Alexandria"
- VICTORY_POINTS_2927:0 "Monroe"
+ ###############
+ ### Florida ###
+ ###############
 
- #------------------------------#
- #          Oklahoma            #
- #------------------------------#
- VICTORY_POINTS_4955:0 "Oklahoma City"
- VICTORY_POINTS_1506:0 "Norman"
- VICTORY_POINTS_4865:0 "Tulsa"
- VICTORY_POINTS_1566:0 "Muskogee"
- VICTORY_POINTS_6141:0 "Guymon"
- VICTORY_POINTS_1406:0 "Lawton"
- VICTORY_POINTS_1620:0 "Woodward"
- VICTORY_POINTS_4958:0 "Edmond"
- VICTORY_POINTS_6202:0 "Enid"
+ VICTORY_POINTS_1017:0 "Tallahassee"
+ VICTORY_POINTS_5381:0 "Gainesville"
+ VICTORY_POINTS_989:0 "St. Augustine"
+ VICTORY_POINTS_5483:0 "Ocala"
+ VICTORY_POINTS_1022:0 "Jacksonville"
+ VICTORY_POINTS_851:0 "Tampa"
+ VICTORY_POINTS_5376:0 "Lakeland"
+ VICTORY_POINTS_1012:0 "Panama City"
+ VICTORY_POINTS_5383:0 "Pensacola"
+ VICTORY_POINTS_928:0 "Daytona Beach"
+ VICTORY_POINTS_5479:0 "Orlando"

@@ -41,27 +41,25 @@ if = {
 set_convoys = 30
 
 set_politics = {
-	ruling_party = democratic
+	ruling_party = neutrality
 	last_election = "1936.1.1"
 	election_frequency = 48
 	elections_allowed = yes
 }
 set_popularities = {
-	democratic = 90
-	fascism = 0
+	democratic = 23
+	fascism = 1
 	communism = 1
-	progressivism = 9
-	neutrality = 0
+	neutrality = 75
 }
 create_country_leader = {
 	
-	name = "Fiorello La Guardia"
+	name = "Jonas Lote"
 	picture = "gfx//leaders//Africa//Portrait_Africa_Generic_2.dds"
 	expire = "1965.1.1"
-	ideology = liberalism
+	ideology = centrism
 	traits = {
-		conservative_grandee
-		lieutenant_of_industry
+		#
 	}
 }
 

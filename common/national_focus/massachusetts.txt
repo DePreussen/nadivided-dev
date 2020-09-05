@@ -21,8 +21,7 @@ focus_tree = {
 	#Focus for Industry of Massachusetts
 	focus = { 
 		id = SMA_industryofmassachusetts
-		#icon = GFX_industryofmassachusetts
-		icon = GFX_focus_SMA_flag_democratic_banner
+		icon = GFX_industryofmassachusetts
 		x = 8
 		y = 5
 		cost = 5
@@ -157,8 +156,8 @@ focus_tree = {
 
 			add_equipment_production = {
 				equipment = {
-					type = USA_infantry_equipment_1 
-					creator = 'SMA'
+					type = infantry_equipment_1 	#was USA_infantry_equipment_1, I just want it to add M1 Garands, hopefully this will fix
+					creator = SMA
 				}
 				requested_factories = 2
 				progress = 0.95 
@@ -554,7 +553,7 @@ focus_tree = {
 	#Focus for Unify New England
 	focus = { 
 		id = SMA_unifynewengland
-		icon = GFX_focus_new_england_flag_democratic_banner
+		icon = GFX_goal_unknown
 		x = 11
 		y = 11
 		cost = 10

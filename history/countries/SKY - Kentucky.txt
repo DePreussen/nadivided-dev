@@ -38,13 +38,3 @@ create_country_leader = {
 		#
 	}
 }
-create_country_leader = {
-
-	name = "Harland Sanders"
-	picture = "leaders//SKY//portrait_harland_sanders"
-	expire = "1965.1.1"
-	ideology = southern_populism
-	traits = {
-		#
-	}
-}
