@@ -1,0 +1,3338 @@
+focus_tree = {
+    id = pennsylvania_focus
+
+    country = {
+        factor = 0
+        modifier = {
+            add = 10
+            tag = SPA
+        }
+    }
+
+    default = no
+
+    #FOCUS_FILTER_STABILITY
+    #FOCUS_FILTER_INDUSTRY
+    #FOCUS_FILTER_ANNEXATION
+    #FOCUS_FILTER_MANPOWER
+    #FOCUS_FILTER_POLITICAL
+    #FOCUS_FILTER_RESEARCH
+    #FOCUS_FILTER_WAR_SUPPORT
+
+    continuous_focus_position = { x = 50 y = 2000 }
+
+#######################################
+###########Deal with Strikes###########
+#######################################
+    focus = {
+        id = SPA_deal_with_the_stikes
+        icon = GFX_focus_destroy_military_factories
+        available = {
+            has_idea = SPA_widespread_strikes
+        }
+        x = 4
+        y = 0
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_POLITICAL }
+        historical_ai = {
+            tag = SPA
+        }
+
+        completion_reward = {
+            add_political_power = 150
+        }
+    }
+    focus = {
+        id = SPA_concession_to_the_unions
+        icon = GFX_focus_eng_concessions_to_the_trade_unions
+        prerequisite = { focus = SPA_deal_with_the_stikes}
+        mutually_exclusive = { focus = SPA_harsh_treatment}
+        x = -1
+        y = 1
+        relative_position_id = SPA_deal_with_the_stikes
+        cost = 10
+        ai_will_do = {
+            factor = 2
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_STABILITY }
+        historical_ai = {
+            has_completed_focus = SPA_deal_with_the_stikes
+        }
+
+        completion_reward = {
+            add_popularity = {
+                ideology = progressivism
+                popularity = 0.1
+            }
+            add_stability = 0.05
+        }
+    }
+    focus = {
+        id = SPA_increase_minimum_wage
+        icon = GFX_focus_increase_minimum_wage
+        prerequisite = { focus = SPA_concession_to_the_unions}
+        x = 0
+        y = 1
+        relative_position_id = SPA_concession_to_the_unions
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+        historical_ai = {
+            has_completed_focus = SPA_concession_to_the_unions
+        }
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = SPA_increased_minimum_wage
+                days = 180
+            }
+            swap_ideas = {
+                remove_idea = SPA_widespread_strikes
+                add_idea = SPA_localized_strikes
+            }
+        }
+    }
+    focus = {
+        id = SPA_8_hour_workday
+        icon = GFX_focus_8_hour_work_day
+        prerequisite = { focus = SPA_increase_minimum_wage}
+        x = 0
+        y = 2
+        relative_position_id = SPA_concession_to_the_unions
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY }
+        historical_ai = {
+            has_completed_focus = SPA_increase_minimum_wage
+        }
+
+        completion_reward = {
+            remove_ideas = SPA_localized_strikes
+            add_stability = 0.05
+            add_war_support = 0.05
+        }
+    }
+    focus = {
+        id = SPA_harsh_treatment
+        icon = GFX_focus_harsh_treatment
+        prerequisite = { focus = SPA_deal_with_the_stikes}
+        mutually_exclusive = { focus = SPA_concession_to_the_unions}
+        x = 1
+        y = 1
+        relative_position_id = SPA_deal_with_the_stikes
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            add_popularity = {
+                ideology = fascism
+                popularity = 0.1
+            }
+            add_stability = -0.05
+        }
+    }
+    focus = {
+        id = SPA_crack_down_on_the_strikes
+        icon = GFX_focus_generic_opression
+        prerequisite = { focus = SPA_harsh_treatment}
+        x = 0
+        y = 1
+        relative_position_id = SPA_harsh_treatment
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+
+        completion_reward = {
+            add_manpower = -100
+            add_political_power = 100
+            add_stability = 0.05
+        }
+    }
+    focus = {
+        id = SPA_compliance_through_fear
+        icon = GFX_goal_generic_dangerous_deal
+        prerequisite = { focus = SPA_crack_down_on_the_strikes}
+        x = 0
+        y = 2
+        relative_position_id = SPA_harsh_treatment
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+
+        completion_reward = {
+            remove_ideas = SPA_widespread_strikes
+            add_political_power = 50
+        }
+    }
+    focus = {
+        id = SPA_workers_back_in_the_factories
+        icon = GFX_focus_generic_worker_factory_smoke
+        prerequisite = { focus = SPA_compliance_through_fear focus = SPA_8_hour_workday}
+        x = 0
+        y = 4
+        relative_position_id = SPA_deal_with_the_stikes
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            random_owned_controlled_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_repair_the_factories
+        icon = GFX_goal_generic_production
+        prerequisite = { focus = SPA_workers_back_in_the_factories}
+        x = -2
+        y = 1
+        relative_position_id = SPA_workers_back_in_the_factories
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            620 = {
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            47 = {
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+            287 = {
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_expand_factories_in_pilidelphia
+        icon = GFX_focus_generic_industry_2
+        prerequisite = { focus = SPA_repair_the_factories}
+        prerequisite = { focus = SPA_repair_the_railways}
+        x = 0
+        y = 1
+        relative_position_id = SPA_repair_the_factories
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            46 = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+            620 = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_develop_southern_factories
+        icon = GFX_focus_industry
+        prerequisite = { focus = SPA_expand_factories_in_pilidelphia}
+        prerequisite = { focus = SPA_expand_the_railways}
+        x = 0
+        y = 2
+        relative_position_id = SPA_repair_the_factories
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            332 = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            618 = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            619 = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            331 = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            289 = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_repair_the_railways
+        icon = GFX_goal_generic_production
+        prerequisite = { focus = SPA_workers_back_in_the_factories}
+        x = 0
+        y = 1
+        relative_position_id = SPA_workers_back_in_the_factories
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            46 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 6
+                    instant_build = yes
+                }
+            }
+            620 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 5
+                    instant_build = yes
+                }
+            }
+            47 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 4
+                    instant_build = yes
+                }
+            }
+            287 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 3
+                    instant_build = yes
+                }
+            }
+            619 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 4
+                    instant_build = yes
+                }
+            }
+            332 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 5
+                    instant_build = yes
+                }
+            }
+            331 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 2
+                    instant_build = yes
+                }
+            }
+            618 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_expand_the_railways
+        icon = GFX_goal_generic_construct_infrastructure
+        prerequisite = { focus = SPA_repair_the_railways}
+        x = 0
+        y = 1
+        relative_position_id = SPA_repair_the_railways
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            every_owned_state = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_national_highway_system
+        icon = GFX_focus_highway_system
+        prerequisite = { focus = SPA_expand_the_railways}
+        x = 0
+        y = 2
+        relative_position_id = SPA_repair_the_railways
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            every_owned_state = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_repair_the_military_factories
+        icon = GFX_goal_generic_production
+        prerequisite = { focus = SPA_workers_back_in_the_factories}
+        x = 2
+        y = 1
+        relative_position_id = SPA_workers_back_in_the_factories
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            620 = {
+                add_building_construction = {
+                    type = arms_factory
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            47 = {
+                add_building_construction = {
+                    type = arms_factory
+                    level = 2
+                    instant_build = yes
+                }
+            }
+            331 = {
+                add_building_construction = {
+                    type = arms_factory
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_expand_pittsburg_arms_factories
+        icon = GFX_goal_generic_construct_mil_factory
+        prerequisite = { focus = SPA_repair_the_military_factories}
+        prerequisite = { focus = SPA_repair_the_railways}
+        x = 0
+        y = 1
+        relative_position_id = SPA_repair_the_military_factories
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            47 = {
+                add_extra_state_shared_building_slots = 3
+                add_building_construction = {
+                    type = arms_factory
+                    level = 3
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_drowning_in_guns
+        icon = GFX_focus_company_supported_war
+        prerequisite = { focus = SPA_expand_pittsburg_arms_factories}
+        prerequisite = { focus = SPA_expand_the_railways}
+        x = 0
+        y = 2
+        relative_position_id = SPA_repair_the_military_factories
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            random_owned_controlled_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = arms_factory
+                    level = 2
+                    instant_build = yes
+                }
+            }
+            random_owned_controlled_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = arms_factory
+                    level = 2
+                    instant_build = yes
+                }
+            }
+            random_owned_controlled_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = arms_factory
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_every_man_a_factory
+        icon = GFX_focus_generic_industry_3
+        prerequisite = { focus = SPA_national_highway_system}
+        prerequisite = { focus = SPA_develop_southern_factories focus = SPA_drowning_in_guns}
+        x = 0
+        y = 3
+        relative_position_id = SPA_repair_the_railways
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            random_owned_controlled_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            random_owned_controlled_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = arms_factory
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            add_ideas = SPA_every_man_a_factory
+        }
+    }
+    focus = {
+        id = SPA_invest_in_universities
+        icon = GFX_focus_research2
+        prerequisite = { focus = SPA_every_man_a_factory}
+        x = 0
+        y = 1
+        relative_position_id = SPA_every_man_a_factory
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_research_slot = 1
+        }
+    }
+#######################################
+#############Generic Army##############
+#######################################
+    focus = {
+        id = SPA_army_acadamy
+        icon = GFX_focus_generic_combined_arms
+        x = 13
+        y = 0
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 0.75
+                uses = 2
+                category = land_doctrine
+            }
+        }
+    }
+    focus = {
+        id = SPA_invest_in_infantry_weapons
+        icon = GFX_focus_upgrade_troops
+        prerequisite = { focus = SPA_army_acadamy}
+        x = -2
+        y = 1
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = infantry_weapons
+            }
+        }
+    }
+    focus = {
+        id = SPA_bicycle_experimentation
+        icon = GFX_focus_generic_manpower
+        prerequisite = { focus = SPA_invest_in_infantry_weapons}
+        x = -2
+        y = 2
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                ahead_reduction = 1
+                category = bicycle_tech
+            }
+        }
+    }
+    focus = {
+        id = SPA_more_guns
+        icon = GFX_focus_upgrade_artillery
+        prerequisite = { focus = SPA_invest_in_infantry_weapons}
+        mutually_exclusive = { focus = SPA_bigger_guns}
+        x = -6
+        y = 2
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_RESEARCH }
+        
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                ahead_reduction = 2
+                category = artillery
+            }
+            add_ideas = SPA_more_guns
+        }
+    }
+    focus = {
+        id = SPA_bigger_guns
+        icon = GFX_focus_upgrade_artillery2
+        prerequisite = { focus = SPA_invest_in_infantry_weapons}
+        mutually_exclusive = { focus = SPA_more_guns}
+        x = -4
+        y = 2
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+        
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                ahead_reduction = 2
+                category = artillery
+            }
+            add_ideas = SPA_bigger_guns
+        }
+    }
+    focus = {
+        id = SPA_reflect_on_the_great_war
+        icon = GFX_focus_generic_commonwealth_build_infantry
+        prerequisite = { focus = SPA_army_acadamy}
+        x = 0
+        y = 1
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 0.75
+                uses = 2
+                category = land_doctrine
+            }
+        }
+    }
+    focus = {
+        id = SPA_infantry_on_wheels
+        icon = GFX_goal_generic_army_motorized
+        prerequisite = { focus = SPA_army_acadamy}
+        x = 2
+        y = 1
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = motorized_equipment
+            }
+        }
+    }
+    focus = {
+        id = SPA_trucks_with_guns
+        icon = GFX_focus_generic_tank_production
+        prerequisite = { focus = SPA_infantry_on_wheels}
+        prerequisite = { focus = SPA_reflect_on_the_great_war}
+        x = 2
+        y = 2
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                ahead_reduction = 2
+                category = armor
+            }
+        }
+    }
+    focus = {
+        id = SPA_faster_trucks
+        icon = GFX_focus_upgrade_moterized
+        prerequisite = { focus = SPA_infantry_on_wheels}
+        x = 4
+        y = 2
+        relative_position_id = SPA_army_acadamy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                ahead_reduction = 2
+                category = cat_mechanized_equipment
+            }
+        }
+    }
+#######################################
+##############Navy + Air###############
+#######################################
+    focus = {
+        id = SPA_expand_eire_dockyards
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 10
+        y = 3
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            287 = {
+                add_extra_state_shared_building_slots = 3
+                add_building_construction = {
+                    type = dockyard
+                    level = 3
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_focus_on_the_great_lakes_fleet
+        icon = GFX_focus_expand_boston
+        prerequisite = { focus = SPA_expand_eire_dockyards}
+        mutually_exclusive = { focus = SPA_focus_on_the_atlantic_fleet}
+        x = 0
+        y = 1
+        relative_position_id = SPA_expand_eire_dockyards
+        cost = 1
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+    }
+    focus = {
+        id = SPA_invest_in_submarines
+        icon = GFX_goal_generic_navy_submarine
+        prerequisite = { focus = SPA_focus_on_the_great_lakes_fleet}
+        x = 0
+        y = 2
+        relative_position_id = SPA_expand_eire_dockyards
+        cost = 9
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                ahead_reduction = 1
+                category = ss_tech
+            }
+        }
+    }
+    focus = {
+        id = SPA_expand_philadelphia_dockyards
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 12
+        y = 3
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            620 = {
+                add_extra_state_shared_building_slots = 3
+                add_building_construction = {
+                    type = dockyard
+                    level = 3
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_focus_on_the_atlantic_fleet
+        icon = GFX_focus_expand_norfolk
+        prerequisite = { focus = SPA_expand_philadelphia_dockyards}
+        mutually_exclusive = { focus = SPA_focus_on_the_great_lakes_fleet}
+        x = 0
+        y = 1
+        relative_position_id = SPA_expand_philadelphia_dockyards
+        cost = 1
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+    }
+    focus = {
+        id = SPA_invest_in_capital_ships
+        icon = GFX_goal_generic_navy_battleship
+        prerequisite = { focus = SPA_focus_on_the_atlantic_fleet}
+        x = 0
+        y = 2
+        relative_position_id = SPA_expand_philadelphia_dockyards
+        cost = 9
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                ahead_reduction = 1
+                category = bb_tech
+            }
+        }
+    }
+    focus = {
+        id = SPA_invest_in_screen_ships
+        icon = GFX_goal_generic_navy_cruiser
+        prerequisite = { focus = SPA_focus_on_the_atlantic_fleet focus = SPA_focus_on_the_great_lakes_fleet}
+        x = 1
+        y = 3
+        relative_position_id = SPA_expand_eire_dockyards
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                ahead_reduction = 1
+                category = dd_tech
+            }
+        }
+    }
+    focus = {
+        id = SPA_ground_support_focus
+        icon = GFX_goal_generic_CAS
+        mutually_exclusive = { focus = SPA_bombing_focus}
+        x = 15
+        y = 3
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        
+        completion_reward = {
+            add_ideas = SPA_ground_support_focus1
+        }
+    }
+    focus = {
+        id = SPA_night_time_training
+        icon = GFX_focus_chi_flying_tigers
+        prerequisite = { focus = SPA_ground_support_focus}
+        x = 0
+        y = 1
+        relative_position_id = SPA_ground_support_focus
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            swap_ideas = {
+                add_idea = SPA_ground_support_focus2
+                remove_idea = SPA_ground_support_focus1
+            }
+        }
+    }
+    focus = {
+        id = SPA_expertizse_training
+        icon = GFX_goal_generic_build_airforce
+        prerequisite = { focus = SPA_night_time_training}
+        x = 0
+        y = 2
+        relative_position_id = SPA_ground_support_focus
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            swap_ideas = {
+                add_idea = SPA_ground_support_focus3
+                remove_idea = SPA_ground_support_focus2
+            }
+        }
+    }
+    focus = {
+        id = SPA_bombing_focus
+        icon = GFX_goal_generic_air_bomber
+        mutually_exclusive = { focus = SPA_ground_support_focus}
+        x = 19
+        y = 3
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            add_ideas = SPA_bombing_focus1
+        }
+    }
+    focus = {
+        id = SPA_strategic_targeting
+        icon = GFX_goal_generic_air_naval_bomber
+        prerequisite = { focus = SPA_bombing_focus}
+        x = 0
+        y = 1
+        relative_position_id = SPA_bombing_focus
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            swap_ideas = {
+                add_idea = SPA_bombing_focus2
+                remove_idea = SPA_bombing_focus1
+            }
+        }
+    }
+    focus = {
+        id = SPA_tactical_training
+        icon = GFX_goal_generic_air_doctrine
+        prerequisite = { focus = SPA_strategic_targeting}
+        x = 0
+        y = 2
+        relative_position_id = SPA_bombing_focus
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            swap_ideas = {
+                add_idea = SPA_bombing_focus3
+                remove_idea = SPA_bombing_focus2
+            }
+        }
+    }
+    focus = {
+        id = SPA_invest_in_fighters
+        icon = GFX_goal_generic_air_fighter2
+        prerequisite = { focus = SPA_ground_support_focus focus = SPA_bombing_focus}
+        x = 2
+        y = 1
+        relative_position_id = SPA_ground_support_focus
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_RESEARCH }
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                ahead_reduction = 2
+                technology = early_fighter
+                technology = fighter1
+                technology = fighter2
+                technology = fighter3
+            }
+        }
+    }
+#######################################
+############Political Trees############
+#######################################
+    focus = {
+        id = SPA_the_late_election
+        icon = GFX_
+        mutually_exclusive = { focus = SPA_embrace_anarchy}
+        x = 50
+        y = 0
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_POLITICAL }
+        historical_ai = {
+            has_completed_focus = SPA_8_hour_workday
+        }
+
+        completion_reward = {
+            add_political_power = 150
+            country_event = {
+                id = penn.2
+            }
+        }
+    }
+    focus = {
+        id = SPA_embrace_anarchy
+        icon = GFX_
+        mutually_exclusive = { focus = SPA_the_late_election}
+        available = {
+            custom_trigger_tooltip = {
+                tooltip = has_embraced_the_strikes
+                has_country_flag = SPA_is_anarchist
+            }
+        }
+        x = 80
+        y = 0
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            remove_ideas = SPA_high_unemployment
+            create_country_leader = {
+	
+                name = "Pennsylvanian Commune"
+                picture = "leaders/POO/not_stolen.dds"
+                expire = "1965.1.1"
+                ideology = anarchism
+                traits = {
+                    #
+                }
+            }
+            set_politics = {
+                ruling_party = neutrality
+            }
+        }
+    }
+#######################################
+############Reunite America############
+#######################################
+    focus = {
+        id = SPA_continue_with_pinchot
+        icon = GFX_
+        prerequisite = { focus = SPA_the_late_election}
+        mutually_exclusive = { focus = SPA_go_with_fritz_julius_kuhn}
+        available = {
+            always = no
+        }
+        x = -10
+        y = 1
+        relative_position_id = SPA_the_late_election
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        historical_ai = {
+            has_completed_focus = SPA_the_late_election
+        }
+        
+        completion_reward = {
+            add_popularity = {
+                ideology = progressivism
+                popularity = 0.1
+            }
+        }
+    }
+    focus = {
+        id = SPA_total_prohibition
+        icon = GFX_
+        prerequisite = { focus = SPA_continue_with_pinchot}
+        mutually_exclusive = { focus = SPA_partial_prohibition}
+        x = -5
+        y = 1
+        relative_position_id = SPA_continue_with_pinchot
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        historical_ai = {
+            has_completed_focus = SPA_continue_with_pinchot
+        }
+
+        completion_reward = {
+            add_ideas = SPA_total_prohibition
+        }
+    }
+    focus = {
+        id = SPA_partial_prohibition
+        icon = GFX_
+        prerequisite = { focus = SPA_continue_with_pinchot}
+        mutually_exclusive = { focus = SPA_total_prohibition}
+        x = -3
+        y = 1
+        relative_position_id = SPA_continue_with_pinchot
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            add_ideas = SPA_partial_prohibition
+        }
+    }
+    focus = {
+        id = SPA_pennsylvania_forest_service
+        icon = GFX_
+        prerequisite = { focus = SPA_continue_with_pinchot}
+        x = -1
+        y = 1
+        relative_position_id = SPA_continue_with_pinchot
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+
+        completion_reward = {
+            add_ideas = SPA_forest_service
+        }
+    }
+    focus = {
+        id = SPA_deal_with_unemployment
+        icon = GFX_
+        prerequisite = { focus = SPA_continue_with_pinchot}
+        x = 2
+        y = 1
+        relative_position_id = SPA_continue_with_pinchot
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_POLITICAL }
+
+        completion_reward = {
+            add_political_power = 150
+        }
+    }
+    focus = {
+        id = SPA_civilian_conservation_corps
+        icon = GFX_
+        prerequisite = { focus = SPA_deal_with_unemployment}
+        x = -1
+        y = 1
+        relative_position_id = SPA_deal_with_unemployment
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_STABILITY }
+
+        completion_reward = {
+            add_stability = 0.05
+            add_ideas = SPA_civilian_conversation_corps
+        }
+    }
+    focus = {
+        id = SPA_pinchot_roads
+        icon = GFX_focus_highway_system
+        prerequisite = { focus = SPA_deal_with_unemployment}
+        x = 1
+        y = 1
+        relative_position_id = SPA_deal_with_unemployment
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            619 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            618 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            331 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            289 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            288 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            287 = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_healthy_unemployment
+        icon = GFX_
+        prerequisite = { focus = SPA_civilian_conservation_corps}
+        prerequisite = { focus = SPA_pinchot_roads}
+        x = 0
+        y = 2
+        relative_position_id = SPA_deal_with_unemployment
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            remove_ideas = SPA_high_unemployment
+        }
+    }
+    focus = {
+        id = SPA_memories_of_the_union
+        icon = GFX_
+        prerequisite = { focus = SPA_healthy_unemployment}
+        prerequisite = { focus = SPA_total_prohibition focus = SPA_partial_prohibition}
+        x = -2
+        y = 1
+        relative_position_id = SPA_healthy_unemployment
+        cost = 1
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            set_rule = {
+                can_create_factions = yes
+            }
+            create_faction = NORTH_EASTERN_UNION
+        }
+    }
+    focus = {
+        id = SPA_liberate_WDC
+        icon = GFX_
+        prerequisite = { focus = SPA_memories_of_the_union}
+        mutually_exclusive = { focus = SPA_target_WDC}
+        available = {
+            country_exists = SMD
+            WDC = {
+                is_subject_of = SMD
+            }
+            NOT = {
+                WDC = {
+                    focus_progress = {
+                        focus = WDC_strike_maryland
+                        progress > 0
+                    }
+                }
+                WDC = {
+                    custom_trigger_tooltip = {
+                        tooltip = owns_maryland_tt
+                        controls_maryland_trigger = yes
+                    }
+                }
+            }
+        }
+        x = -1
+        y = 1
+        relative_position_id = SPA_memories_of_the_union
+        cost = 9
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            create_wargoal = {
+                type = annex_everything
+                target = SMD
+            }
+            custom_effect_tooltip = SPA_cliam_maryland_and_WDC
+			hidden_effect = {
+				claim_maryland = yes
+                add_state_claim = 44
+			}
+        }
+    }
+    focus = {
+        id = SPA_target_WDC
+        icon = GFX_
+        prerequisite = { focus = SPA_memories_of_the_union}
+        mutually_exclusive = { focus = SPA_liberate_WDC}
+        available = {
+            country_exists = WDC
+            WDC = {
+                custom_trigger_tooltip = {
+                    tooltip = owns_maryland_tt
+                    controls_maryland_trigger = yes
+                }
+            }
+        }
+        x = 1
+        y = 1
+        relative_position_id = SPA_memories_of_the_union
+        cost = 9
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            create_wargoal = {
+                type = annex_everything
+                target = WDC
+            }
+            custom_effect_tooltip = SPA_cliam_maryland_and_WDC_tt
+			hidden_effect = {
+				claim_maryland = yes
+                add_state_claim = 44
+			}
+        }
+    }
+    focus = {
+        id = SPA_hold_a_mock_election
+        icon = GFX_
+        prerequisite = { focus = SPA_target_WDC focus = SPA_liberate_WDC}
+        available = {
+            custom_trigger_tooltip = {
+                tooltip = SPA_owns_maryland_and_WDC_tt
+                controls_maryland_trigger = yes
+                controls_state = 44
+            }
+        }
+        x = 0
+        y = 2
+        relative_position_id = SPA_memories_of_the_union
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        
+        completion_reward = {
+            country_event = {
+                id = penn.4
+            }
+        }
+    }
+    focus = {
+        id = SPA_a_question_of_the_capital
+        icon = GFX_
+        prerequisite = { focus = SPA_hold_a_mock_election}
+        x = -3
+        y = 1
+        relative_position_id = SPA_hold_a_mock_election
+        cost = 1
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_POLITICAL }
+
+        completion_reward = {
+            add_political_power = 10
+        }
+    }
+    focus = {
+        id = SPA_keep_the_current_capital
+        icon = GFX_
+        prerequisite = { focus = SPA_a_question_of_the_capital}
+        mutually_exclusive = { focus = SPA_the_old_capital_philadelphia}
+        mutually_exclusive = { focus = SPA_move_the_captial_to_DC}
+        x = -2
+        y = 1
+        relative_position_id = SPA_a_question_of_the_capital
+        cost = 9
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+    focus = {
+        id = SPA_the_old_capital_philadelphia
+        icon = GFX_
+        prerequisite = { focus = SPA_a_question_of_the_capital}
+        available = {
+            controls_state = 46
+        }
+        mutually_exclusive = { focus = SPA_keep_the_current_capital}
+        mutually_exclusive = { focus = SPA_move_the_captial_to_DC}
+        x = 0
+        y = 1
+        relative_position_id = SPA_a_question_of_the_capital
+        cost = 9
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+        completion_reward = {
+            set_capital = 46
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+    focus = {
+        id = SPA_move_the_captial_to_DC
+        icon = GFX_
+        prerequisite = { focus = SPA_a_question_of_the_capital}
+        available = {
+            controls_state = 44
+        }
+        mutually_exclusive = { focus = SPA_keep_the_current_capital}
+        mutually_exclusive = { focus = SPA_the_old_capital_philadelphia}
+        x = 2
+        y = 1
+        relative_position_id = SPA_a_question_of_the_capital
+        cost = 9
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+        completion_reward = {
+            set_capital = 44
+            add_political_power = 50
+            add_stability = 0.05
+        }
+    }
+    focus = {
+        id = SPA_align_delaware
+        icon = GFX_
+        prerequisite = { focus = SPA_hold_a_mock_election}
+        x = 1
+        y = 1
+        relative_position_id = SPA_hold_a_mock_election
+        cost = 5
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            custom_effect_tooltip = SPA_annex_later_tt
+            custom_effect_tooltip = SPA_higher_chance_join_relation_good_60_tt
+            if = {
+                limit = {
+                    country_exists = SDE
+                }
+                SDE = {
+                    country_event = {
+                        id = penn.5
+                    }
+                }
+            }
+            claim_delaware = yes
+        }
+    }
+    focus = {
+        id = SPA_align_new_jersey
+        icon = GFX_
+        prerequisite = { focus = SPA_hold_a_mock_election}
+        x = 3
+        y = 1
+        relative_position_id = SPA_hold_a_mock_election
+        cost = 5
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            custom_effect_tooltip = SPA_annex_later_tt
+            custom_effect_tooltip = SPA_higher_chance_join_relation_good_60_tt
+            if = {
+                limit = {
+                    country_exists = SNJ
+                }
+                SNJ = {
+                    country_event = {
+                        id = penn.5
+                    }
+                }
+            }
+            claim_new_jersey = yes
+        }
+    }
+    focus = {
+        id = SPA_oppose_new_york
+        icon = GFX_
+        prerequisite = { focus = SPA_align_new_jersey focus = SPA_align_delaware}
+        x = 2
+        y = 2
+        relative_position_id = SPA_hold_a_mock_election
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            create_wargoal = {
+                target = SNY
+                type = annex_everything
+            }
+            claim_new_york = yes
+            add_state_claim = 26
+            add_state_claim = 202
+            add_state_claim = 27
+            add_state_claim = 28
+        }
+    }
+    focus = {
+        id = SPA_develop_closer_ties_to_our_allies
+        icon = GFX_
+        prerequisite = { focus = SPA_oppose_new_york}
+        x = -1
+        y = 1
+        relative_position_id = SPA_oppose_new_york
+        cost = 5
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            custom_effect_tooltip = SPA_less_likely_oppose_with_war_tt
+            if = {
+                limit = {
+                    is_in_faction_with = SDE
+                }
+                SDE = {
+                    country_event = {
+                        id = penn.8
+                    }
+                }
+            }
+            core_delaware = yes
+            if = {
+                limit = {
+                    is_in_faction_with = SNJ
+                }
+                SNJ = {
+                    country_event = {
+                        id = penn.8
+                    }
+                }
+            }
+            core_new_jersey = yes
+        }
+    }
+    focus = {
+        id = SPA_finish_integration
+        icon = GFX_
+        prerequisite = { focus = SPA_develop_closer_ties_to_our_allies}
+        available = {
+            OR = {
+                SNJ = {
+                    is_subject_of = SPA
+                }
+                SDE = {
+                    is_subject_of = SPA
+                }
+            }
+        }
+        x = -1
+        y = 2
+        relative_position_id = SPA_oppose_new_york
+        cost = 5
+        ai_will_do = {
+            factor = 1
+            modifier = {
+                factor = 0
+                has_war = yes
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SNJ = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+                    target = SNJ
+                    transfer_troops = yes
+                }
+            }
+            if = {
+                limit = {
+                    SDE = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+                    target = SDE
+                    transfer_troops = yes
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_the_final_push
+        icon = GFX_
+        prerequisite = { focus = SPA_oppose_new_york}
+        bypass = {
+            NOT = {
+                has_war_with = SNY
+            }
+        }
+        x = 1
+        y = 1
+        relative_position_id = SPA_oppose_new_york
+        cost = 10
+        ai_will_do = {
+            factor = 1
+            modifier = {
+                factor = 2
+                has_war_with = SNY
+            }
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = SPA_the_final_push
+                days = 90
+            }
+        }
+    }
+    focus = {
+        id = SPA_vicotry_over_new_york
+        icon = GFX_
+        prerequisite = { focus = SPA_the_final_push}
+        available = {
+            custom_trigger_tooltip = {
+                tooltip = SPA_owns_new_york_and_nyc_tt
+                controls_new_york_trigger = yes
+                controls_state = 26
+                controls_state = 27
+                controls_state = 28
+                controls_state = 202
+            }
+        }
+        x = 0
+        y = 3
+        relative_position_id = SPA_oppose_new_york
+        cost = 10
+        ai_will_do = {
+            factor = 2
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            custom_effect_tooltip = SPA_core_SNY_and_NYC_tt
+            hidden_effect = {
+                core_new_york = yes
+                add_state_core = 26
+                add_state_core = 27
+                add_state_core = 28
+                add_state_core = 202
+            }
+        }
+    }
+    focus = {
+        id = SPA_align_new_england
+        icon = GFX_
+        prerequisite = { focus = SPA_vicotry_over_new_york}
+        available = {
+            OR = {
+                country_exists = SMA
+                country_exists = SME
+                country_exists = SRI
+                country_exists = SCT
+                country_exists = SNH
+                country_exists = SVT
+            }
+        }
+        x = 0
+        y = 1
+        relative_position_id = SPA_vicotry_over_new_york
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            custom_effect_tooltip = SPA_higher_chance_join_relation_good_60_tt
+            custom_effect_tooltip = SPA_unlocks_decisions_to_integrate_influenced_countries
+            add_ideas = SPA_diplomatic_focus
+            if = {
+                limit = {
+                    country_exists = SMA
+                }
+                SMA = {
+                    add_ideas = SPA_pennsylvanian_influence
+                    country_event = {
+                        id = penn.9
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    country_exists = SME
+                }
+                SME = {
+                    add_ideas = SPA_pennsylvanian_influence
+                    country_event = {
+                        id = penn.9
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    country_exists = SRI
+                }
+                SRI = {
+                    add_ideas = SPA_pennsylvanian_influence
+                    country_event = {
+                        id = penn.9
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    country_exists = SCT
+                }
+                SCT = {
+                    add_ideas = SPA_pennsylvanian_influence
+                    country_event = {
+                        id = penn.9
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    country_exists = SNH
+                }
+                SNH = {
+                    add_ideas = SPA_pennsylvanian_influence
+                    country_event = {
+                        id = penn.9
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    country_exists = SVT
+                }
+                SVT = {
+                    add_ideas = SPA_pennsylvanian_influence
+                    country_event = {
+                        id = penn.9
+                    }
+                }
+            }
+        }
+    }
+#######################################
+############Forming the Bund###########
+#######################################
+    focus = {
+        id = SPA_go_with_fritz_julius_kuhn
+        icon = GFX_
+        prerequisite = { focus = SPA_the_late_election}
+        mutually_exclusive = { focus = SPA_continue_with_pinchot}
+        x = 16
+        y = 1
+        relative_position_id = SPA_the_late_election
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+
+        completion_reward = {
+            add_popularity = {
+                ideology = communism
+                popularity = 0.1
+            }
+            add_stability = -0.1
+        }
+    }
+    focus = {
+        id = SPA_germanize_pennsylvania
+        icon = GFX_
+        prerequisite = { focus = SPA_go_with_fritz_julius_kuhn}
+        x = 0
+        y = 1
+        relative_position_id = SPA_go_with_fritz_julius_kuhn
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_STABILITY }
+
+        completion_reward = {
+            add_stability = 0.1
+        }
+    }
+    focus = {
+        id = SPA_send_volunteers_to_the_war_in_europe
+        icon = GFX_
+        prerequisite = { focus = SPA_germanize_pennsylvania}
+        x = -2
+        y = 1
+        relative_position_id = SPA_germanize_pennsylvania
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            add_manpower = -50000
+            custom_effect_tooltip = SPA_veteran_troops_1_year_tt
+            hidden_effect = {
+                country_event = {
+                    id = penn.13
+                    days = 360
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_invite_german_officers
+        icon = GFX_
+        prerequisite = { focus = SPA_send_volunteers_to_the_war_in_europe}
+        available = {
+            custom_trigger_tooltip = {
+                tooltip = SPA_voltunteers_have_returned_tt
+                has_country_flag = SPA_volunteers_returned
+            }
+        }
+        x = -2
+        y = 2
+        relative_position_id = SPA_germanize_pennsylvania
+        cost = 5
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            army_experience = 50
+            create_field_marshal = {
+                name = "Gerd von Rundstedt"
+                picture = "Portrait_Germany_Gerd_von_Rundstedt.dds"
+                traits = { defensive_doctrine urban_assault_specialist old_guard }
+                skill = 3
+                attack_skill = 3
+                defense_skill = 2
+                planning_skill = 3
+                logistics_skill = 2
+            }
+            create_corps_commander = {
+                name = "Erwin Rommel"
+                picture = "Portrait_Germany_Erwin_Rommel.dds"
+                traits = { trickster trait_reckless war_hero armor_officer media_personality }
+                skill = 4
+                attack_skill = 4
+                defense_skill = 4
+                planning_skill = 2
+                logistics_skill = 3
+            }
+            create_corps_commander = {
+                name = "Wilhelm Ritter von Leeb"
+                picture = "Portrait_Germany_Wilhelm_Ritter_von_Leeb.dds"
+                traits = { old_guard infantry_officer }
+                skill = 3
+                attack_skill = 4
+                defense_skill = 3
+                planning_skill = 1
+                logistics_skill = 2
+            }
+        }  
+    }
+    focus = {
+        id = SPA_teach_german_as_a_secondary_language
+        icon = GFX_
+        prerequisite = { focus = SPA_germanize_pennsylvania}
+        x = 0
+        y = 1
+        relative_position_id = SPA_germanize_pennsylvania
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = yes
+        search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+
+        completion_reward = {
+            add_stability = 0.05
+            add_war_support = 0.05
+        }
+    }
+    focus = {
+        id = SPA_german_engineering
+        icon = GFX_
+        prerequisite = { focus = SPA_teach_german_as_a_secondary_language}
+        x = 0
+        y = 2
+        relative_position_id = SPA_germanize_pennsylvania
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+
+        completion_reward = {
+            random_owned_controlled_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            add_ideas = SPA_german_engineering
+        }
+    }
+    focus = {
+        id = SPA_fan_german_nationalism
+        icon = GFX_
+        prerequisite = { focus = SPA_teach_german_as_a_secondary_language}
+        x = 2
+        y = 2
+        relative_position_id = SPA_germanize_pennsylvania
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_MANPOWER }
+
+        completion_reward = {
+            add_ideas = SPA_german_nationalism
+        }
+    }
+    focus = {
+        id = SPA_claim_the_german_american_bund
+        icon = GFX_
+        prerequisite = { focus = SPA_german_engineering}
+        prerequisite = { focus = SPA_fan_german_nationalism}
+        available = {
+            has_army_manpower = {
+                size > 150000
+            }
+        }
+        x = 0
+        y = 3
+        relative_position_id = SPA_germanize_pennsylvania
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            custom_effect_tooltip = SPA_gain_claims_on_armerican_bund_tt
+            hidden_effect = {
+                claim_north_dakota = yes
+                claim_south_dakota = yes
+                claim_nebraska = yes
+                core_kansas = yes
+                claim_minnesota = yes
+                claim_iowa = yes
+                claim_missouri = yes
+                claim_wisconsin = yes
+                core_illinios = yes
+                core_michigan = yes
+                core_indiana = yes
+                core_ohio = yes
+                claim_kentucky = yes
+                claim_west_virginia = yes
+                claim_maryland = yes
+                claim_delaware = yes
+                #claim_pennsylvania = yes
+                claim_new_jersey = yes
+                claim_new_york = yes
+                ###NYC###
+                add_state_claim = 26
+                add_state_claim = 27
+                add_state_claim = 28
+                add_state_claim = 202
+            }
+        }
+    }
+    focus = {
+        id = SPA_demand_delaware
+        icon = GFX_
+        prerequisite = { focus = SPA_claim_the_german_american_bund}
+        available = {
+            has_army_manpower = {
+                size > 200000
+            }
+            is_puppet = no
+            NOT = {
+                has_war_with = SDE
+            }
+        }
+        cancel = {
+            has_war_with = SDE
+            is_subject = yes
+        }
+        x = 0
+        y = 1
+        relative_position_id = SPA_claim_the_german_american_bund
+        cost = 10
+        ai_will_do = {
+            factor = 2
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION}
+
+        completion_reward = {
+            army_experience = 25
+            add_named_threat = { threat = 5 name = SPA_demand_delaware_threat}
+            if = {
+                limit = {
+                    SDE = {
+                        OR = {
+                            owns_state = 411
+                            owns_state = 412
+                            owns_state = 413
+                        }
+                    }
+                }
+                SDE = {
+                    country_event = {
+                        id = penn.14
+                    }
+                }
+            }
+            if = {
+                limit = {
+                    SDE = {
+                        NOT = {
+                            owns_state = 411
+                        }
+                    }
+                }
+                add_state_core = 411
+            }
+            if = {
+                limit = {
+                    SDE = {
+                        NOT = {
+                            owns_state = 412
+                        }
+                    }
+                }
+                add_state_core = 412
+            }
+            if = {
+                limit = {
+                    SDE = {
+                        NOT = {
+                            owns_state = 413
+                        }
+                    }
+                }
+                add_state_core = 413
+            }
+        }
+    }
+    focus = {
+        id = SPA_reunite_the_bund
+        icon = GFX_
+        prerequisite = { focus = SPA_demand_delaware }
+        available = {
+            has_army_manpower = {
+                size > 225000
+            }
+        }
+        x = 0
+        y = 2
+        relative_position_id = SPA_claim_the_german_american_bund
+        cost = 10
+        ai_will_do = {
+            factor = 2
+        }
+        available_if_capitulated = no
+
+        completion_reward = {
+            add_war_support = 0.1
+        }
+    }
+    focus = {
+        id = SPA_take_out_new_york_city
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = NYC
+            }
+        }
+        x = -5
+        y = 2
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    NYC = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    NYC = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = NYC
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = NYC
+                        NOT = {
+                            NYC = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = NYC
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_new_york
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SNY
+            }
+        }
+        x = -4
+        y = 1
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SNY = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SNY = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SNY
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SNY
+                        NOT = {
+                            SNY = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SNY
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_new_jersey
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SNJ
+            }
+        }
+        x = -3
+        y = 2
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SNJ = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SNJ = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SNJ
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SNJ
+                        NOT = {
+                            SNJ = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SNJ
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_maryland
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SMD
+            }
+        }
+        x = -2
+        y = 1
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SMD = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SMD = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SMD
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SMD
+                        NOT = {
+                            SMD = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SMD
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_west_virginia
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SWV
+            }
+        }
+        x = -1
+        y = 2
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SWV = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SWV = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SWV
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SWV
+                        NOT = {
+                            SWV = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SWV
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_ohio
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SOH
+            }
+        }
+        x = 0
+        y = 1
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SOH = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SOH = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SOH
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SOH
+                        NOT = {
+                            SOH = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SOH
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_indiana
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SIN
+            }
+        }
+        x = 1
+        y = 2
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SIN = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SIN = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SIN
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SIN
+                        NOT = {
+                            SIN = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SIN
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_kentucky
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SKY
+            }
+        }
+        x = 2
+        y = 1
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SKY = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SKY = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SKY
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SKY
+                        NOT = {
+                            SKY = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SKY
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_michigan
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SMI
+            }
+        }
+        x = 3
+        y = 2
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SMI = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SMI = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SMI
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SMI
+                        NOT = {
+                            SMI = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SMI
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_illinios
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SIL
+            }
+        }
+        x = 4
+        y = 1
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SIL = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SIL = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SIL
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SIL
+                        NOT = {
+                            SIL = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SIL
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_wisconson
+        icon = GFX_
+        prerequisite = { focus = SPA_reunite_the_bund}
+        bypass = {
+            NOT = {
+                country_exists = SWI
+            }
+        }
+        x = 5
+        y = 2
+        relative_position_id = SPA_reunite_the_bund
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SWI = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SWI = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SWI
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SWI
+                        NOT = {
+                            SWI = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SWI
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_north_dakota
+        icon = GFX_
+        prerequisite = { focus = SPA_take_out_wisconson}
+        bypass = {
+            NOT = {
+                country_exists = SND
+            }
+        }
+        x = -8
+        y = 2
+        relative_position_id = SPA_take_out_wisconson
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SND = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SND = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SND
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SND
+                        NOT = {
+                            SND = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SND
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_south_dakota
+        icon = GFX_
+        prerequisite = { focus = SPA_take_out_wisconson}
+        bypass = {
+            NOT = {
+                country_exists = SSD
+            }
+        }
+        x = -7
+        y = 1
+        relative_position_id = SPA_take_out_wisconson
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SSD = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SSD = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SSD
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SSD
+                        NOT = {
+                            SSD = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SSD
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_nebraska
+        icon = GFX_
+        prerequisite = { focus = SPA_take_out_wisconson}
+        bypass = {
+            NOT = {
+                country_exists = SNE
+            }
+        }
+        x = -6
+        y = 2
+        relative_position_id = SPA_take_out_wisconson
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SNE = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SNE = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SNE
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SNE
+                        NOT = {
+                            SNE = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SNE
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_kansas
+        icon = GFX_
+        prerequisite = { focus = SPA_take_out_wisconson}
+        bypass = {
+            NOT = {
+                country_exists = SKS
+            }
+        }
+        x = -5
+        y = 1
+        relative_position_id = SPA_take_out_wisconson
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SKS = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SKS = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SKS
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SKS
+                        NOT = {
+                            SKS = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SKS
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_missouri
+        icon = GFX_
+        prerequisite = { focus = SPA_take_out_wisconson}
+        bypass = {
+            NOT = {
+                country_exists = SMO
+            }
+        }
+        x = -4
+        y = 2
+        relative_position_id = SPA_take_out_wisconson
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SMO = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SMO = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SMO
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SMO
+                        NOT = {
+                            SMO = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SMO
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_iowa
+        icon = GFX_
+        prerequisite = { focus = SPA_take_out_wisconson}
+        bypass = {
+            NOT = {
+                country_exists = SIA
+            }
+        }
+        x = -3
+        y = 1
+        relative_position_id = SPA_take_out_wisconson
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SIA = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SIA = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SIA
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SIA
+                        NOT = {
+                            SIA = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SIA
+                    type = annex_everything
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_take_out_minnesota
+        icon = GFX_
+        prerequisite = { focus = SPA_take_out_wisconson}
+        bypass = {
+            NOT = {
+                country_exists = SMN
+            }
+        }
+        x = -2
+        y = 2
+        relative_position_id = SPA_take_out_wisconson
+        cost = 6
+        ai_will_do = {
+            factor = 2
+            modifier = {
+                factor = 0
+                NOT = {
+                    SIA = {
+                        is_neighbor_of = SPA
+                    }
+                }
+            }
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_ANNEXATION }
+
+        completion_reward = {
+            if = {
+                limit = {
+                    SIA = {
+                        is_subject_of = SPA
+                    }
+                }
+                annex_country = {
+					target = SIA
+					transfer_troops = yes
+				}
+            }
+            if = {
+                limit = {
+                    AND = {
+                        country_exists = SIA
+                        NOT = {
+                            SIA = {
+                                is_subject_of = SPA
+                            }
+                        }
+                    }
+                }
+                create_wargoal = {
+                    target = SIA
+                    type = annex_everything
+                }
+            }
+        }
+    }
+#######################################
+############Embrace Anarchy############
+#######################################
+    focus = {
+        id = SPA_support_the_portland_commune
+        icon = GFX_
+        prerequisite = { focus = SPA_embrace_anarchy}
+        available = {
+            country_exists = POO
+        }
+        x = -3
+        y = 1
+        relative_position_id = SPA_embrace_anarchy
+        cost = 10
+        ai_will_do = {
+            factor = 3
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_POLITICAL }
+
+        completion_reward = {
+            add_political_power = 100
+            custom_effect_tooltip = SPA_support_POO_tt
+            hidden_effect = {
+                POO = {
+                    country_event = {
+                        id = penn.3
+                    }
+                }
+            }
+        }
+    }
+    focus = {
+        id = SPA_state_of_anarchy
+        icon = GFX_
+        prerequisite = { focus = SPA_embrace_anarchy}
+        x = 0
+        y = 1
+        relative_position_id = SPA_embrace_anarchy
+        cost = 10
+        ai_will_do = {
+            factor = 1
+        }
+        available_if_capitulated = no
+        search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+
+        completion_reward = {
+            add_ideas = SPA_controlled_chaos
+        }
+    }
+}

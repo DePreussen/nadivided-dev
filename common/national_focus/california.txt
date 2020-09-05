@@ -8,17 +8,10 @@ focus_tree = {
 		} 
 	} 
 	continuous_focus_position = { x = 50 y = 1600 }
-	
-	#-----------------------------------------------------#
-	 #                           					     #
-	  #						FOCUSES			 	     	#
-	 #                           						 #
-	#-----------------------------------------------------#
-						
 	focus = { 
 		id = SCA_nationalize_the_armed_forces
-		icon = GFX_goal_generic_demand_territory
-		x = 27
+		icon = GFX_goal_cali_army
+		x = 40
 		y = 0
 		cost = 4
 		available_if_capitulated = yes 
@@ -35,7 +28,7 @@ focus_tree = {
 	focus = { 
 		id = SCA_from_sea_to_shining_sea
 		icon = GFX_focus_generic_the_giant_wakes
-		x = 10
+		x = 16
 		y = 2
 		cost = 2
 		available_if_capitulated = yes 
@@ -53,8 +46,8 @@ focus_tree = {
 	} 
 	focus = {
 		id = SCA_the_mexican_question		# Moved up in the code by your overlord to fix a bug :)
-		icon = focus_mexico_hat
-		x = -7
+		icon = GFX_focus_mexico_hat
+		x = -9
 		y = 4
 		cost = 10
 		available_if_capitulated = yes 
@@ -96,6 +89,23 @@ focus_tree = {
 		icon = GFX_goal_generic_demand_territory
 		x = 4
 		y = 2
+		cost = 6
+		available_if_capitulated = yes 
+		prerequisite = { 
+			focus = SCA_racial_reforms
+		}
+		relative_position_id = SCA_a_new_union_for_all
+		ai_will_do = { 
+			factor = 1
+		} 
+		completion_reward = { 
+		}
+	}
+	focus = { 
+		id = SCA_fund_universities
+		icon = GFX_goal_generic_demand_territory
+		x = 4
+		y = 3
 		cost = 6
 		available_if_capitulated = yes 
 		prerequisite = { 
@@ -233,7 +243,7 @@ focus_tree = {
 		icon = GFX_goal_unknown
 		x = 4
 		y = 1
-		cost = 8
+		cost = 4
 		available_if_capitulated = yes 
 		prerequisite = {
 			focus = SCA_reshaping_the_course_of_our_nation
@@ -246,7 +256,6 @@ focus_tree = {
 		}  
 		completion_reward = { 
 			SCA = {
-				add_ideas= democratic_influence
 			}
 		}
 	} 
@@ -283,35 +292,35 @@ focus_tree = {
 	} 
 
 #civil war focuses start here
-	focus = { 
-		id = SCA_silver_legions
-		icon = GFX_goal_support_fascism
-		x = -10
-		y = 1
-		cost = 7
-		available_if_capitulated = yes 
-		prerequisite = {
-			focus = SCA_reshaping_the_course_of_our_nation
-		}
-		mutually_exclusive = {
-			focus = SCA_stay_true_to_the_american_dream
-		} 
-		ai_will_do = { 
-			factor = 1
-		} 
-		completion_reward= {
-			SCA = {
-				add_popularity= {
-					ideology = fascism 
-					popularity = .05
-				} 
-				add_popularity= {
-					ideology = communism 
-					popularity = .05
-				} 
-			}
-		}
-	}
+	#focus = { 
+	#	id = SCA_silver_legions
+	#	icon = GFX_goal_support_fascism
+	#	x = -10
+	#	y = 1
+	#	cost = 7
+	#	available_if_capitulated = yes 
+	#	prerequisite = {
+	#		focus = SCA_reshaping_the_course_of_our_nation
+	#	}
+	#	mutually_exclusive = {
+	#		focus = SCA_stay_true_to_the_american_dream
+	#	} 
+	#	ai_will_do = { 
+	#		factor = 1
+	#	} 
+	#	completion_reward= {
+	#		SCA = {
+	#			add_popularity= {
+	#				ideology = fascism 
+	#				popularity = .05
+	#			} 
+	#			add_popularity= {
+	#				ideology = communism 
+	#				popularity = .05
+	#			} 
+	#		}
+	#	}
+	#}
 	
 #Focus for SCA_Extort the southern states
 	focus = { 
@@ -444,9 +453,9 @@ focus_tree = {
 	focus = {
 		id = SCA_befriend_the_neighbors
 		icon = GFX_goal_generic_military_sphere
-		x = -1
+		x = 6
 		y = 1
-		cost = 10
+		cost = 8
 		available_if_capitulated = yes 
 		prerequisite = {
 			focus = SCA_maintain_the_western_democracies
@@ -473,10 +482,10 @@ focus_tree = {
 	}
 	focus = {
 		id = SCA_intergrate_Nevada
-		icon = GFX_goal_generic_military_sphere
+		icon = GFX_goal_generic_nevada
 		x = 2
 		y = 1
-		cost = 10
+		cost = 8
 		available_if_capitulated = yes 
 		prerequisite = {
 			focus = SCA_maintain_the_western_democracies
@@ -498,9 +507,9 @@ focus_tree = {
 	focus = {
 		id = SCA_contain_idaho
 		icon = GFX_goal_generic_military_sphere
-		x = 1
+		x = -1
 		y = 1
-		cost = 10
+		cost = 8
 		available_if_capitulated = yes 
 		prerequisite = {
 			focus = SCA_intergrate_Nevada
@@ -548,10 +557,10 @@ focus_tree = {
     }
 }
 focus = {
-		id = SCA_arizonia_splits
+		id = SCA_sway_arizona
 		icon = GFX_goal_generic_military_sphere
-		x = 0
-		y = 4
+		x = 1
+		y = 1
 		cost = 10
 		available_if_capitulated = yes 
 		prerequisite = {
@@ -568,12 +577,12 @@ focus = {
 focus = {
 		id = SCA_Establish_native_government
 		icon = GFX_goal_generic_military_sphere
-		x = 4
+		x = 9
 		y = 4
 		cost = 10
 		available_if_capitulated = yes 
 		prerequisite = {
-			#focus = SCA_arizonia_intergrations
+			focus = SCA_arizonia_intergrations
 			focus = SCA_give_into_native_demands
 		}
 		relative_position_id = SCA_intergrate_Nevada
@@ -597,7 +606,7 @@ focus = {
 	focus = {
 		id = SCA_develop_las_vegas
 		icon = GFX_goal_generic_military_sphere
-		x = -2
+		x = 3
 		y = 2
 		cost = 10
 		available_if_capitulated = yes 
@@ -660,7 +669,7 @@ focus = {
 	focus = {
 		id = SCA_support_oregon_war
 		icon = GFX_goal_generic_military_sphere
-		x = 5
+		x = 10
 		y = 1
 		cost = 5
 		available_if_capitulated = yes 
@@ -693,7 +702,7 @@ focus = {
 	}
 	focus = {
 		id = SCA_support_oregon
-		icon = GFX_goal_generic_military_sphere
+		icon = GFX_goal_generic_oregon
 		x = 0
 		y = 1
 		cost = 5
@@ -735,13 +744,54 @@ focus = {
 	focus = { 
 		id = SCA_Labor_unions_demands
 		icon = GFX_goal_unknown
-		x = 12
-		y = 6
+		x = 2
+		y = 1
 		cost = 10
 		available_if_capitulated = yes 
 		prerequisite = {
 			focus = SCA_establish_free_government
 		}  
+		relative_position_id = SCA_establish_free_government
+		ai_will_do = { 
+			factor = 1
+		} 
+		completion_reward = {
+			SCA = {
+				
+			}	
+		} 
+	}
+	focus = { 
+		id = SCA_dustbowl_recovery
+		icon = GFX_goal_unknown
+		x = 2
+		y = 2
+		cost = 12
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_establish_free_government
+		}  
+		relative_position_id = SCA_establish_free_government
+		ai_will_do = { 
+			factor = 1
+		} 
+		completion_reward = {
+			SCA = {
+				
+			}	
+		} 
+	}
+	focus = { 
+		id = SCA_end_poverty
+		icon = GFX_goal_unknown
+		x = 2
+		y = 3
+		cost = 12
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_establish_free_government
+		}  
+		relative_position_id = SCA_establish_free_government
 		ai_will_do = { 
 			factor = 1
 		} 
@@ -775,7 +825,7 @@ focus = {
 	focus = {
 		id = SCA_develop_allies_industries_for_protections
 		icon = GFX_goal_generic_construct_civ_factory
-		x = -1
+		x = 1
 		y = 1
 		cost = 10
 		available_if_capitulated = yes 
@@ -829,9 +879,9 @@ focus = {
 	}
 	focus = {
 		id = SCA_fed_army_revamp
-		icon = GFX_goal_generic_construct_civ_factory
-		x = 0
-		y = 3
+		icon = GFX_goal_cali_army
+		x = -2
+		y = 1
 		cost = 10
 		available_if_capitulated = yes 
 		available = {
@@ -846,7 +896,7 @@ focus = {
 		ai_will_do = { 
 			factor = 1
 		}
-		relative_position_id = SCA_befriend_the_neighbors
+		relative_position_id = SCA_develop_las_vegas
 		completion_reward= {
 			SCA = {
 				add_ideas = {
@@ -869,7 +919,7 @@ focus = {
 	
 	focus = {
 		id = SCA_prop_up_cartel_power
-		icon = focus_mexico_hat
+		icon = GFX_focus_mexico_hat
 		x = 1
 		y = 1
 		relative_position_id = SCA_the_mexican_question
@@ -892,7 +942,7 @@ focus = {
 	}
 	focus = {
 		id = SCA_support_republicist_ideals
-		icon = focus_mexico_hat
+		icon = GFX_focus_mexico_hat
 		x = -1
 		y = 1
 		relative_position_id = SCA_the_mexican_question
@@ -919,11 +969,159 @@ focus = {
 		icon = focus_mexico_hat
 		x = -4
 		y = 3
-		cost = 10
+		cost = 8
 		available_if_capitulated = yes 
 		prerequisite = {
 			focus = SCA_maintain_the_western_democracies
 		} 
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			SCA = {
+				add_idea = SCA_fernando_manriquez
+			}
+		}
+	}
+	focus = {
+		id = SCA_prepare_for_storm
+		icon = focus_mexico_hat
+		x = -1
+		y = 1
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_counter_intelliegence_training
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = SCA_bid_for_newmex
+		icon = focus_mexico_hat
+		x = -1
+		y = 2
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_prepare_for_storm
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			
+		}
+	}
+	focus = {
+		id = SCA_rio_grande_line
+		icon = focus_mexico_hat
+		x = -1
+		y = 3
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_bid_for_newmex
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			
+		}
+	}
+	focus = {
+		id = SCA_consolidate_the_rockies
+		icon = focus_mexico_hat
+		x = 1
+		y = 1
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_counter_intelliegence_training
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			
+		}
+	}
+	focus = {
+		id = SCA_fold_idaho
+		icon = focus_mexico_hat
+		x = 1
+		y = 2
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_consolidate_the_rockies
+
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			
+		}
+	}
+	focus = {
+		id = SCA_potato_trade
+		icon = focus_mexico_hat
+		x = 3
+		y = 2
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_consolidate_the_rockies
+			focus = SCA_contain_idaho
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			
+		}
+	}
+	focus = {
+		id = SCA_land_for_alliance
+		icon = focus_mexico_hat
+		x = 3
+		y = 3
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_potato_trade
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
+		ai_will_do = { 
+			factor = 1
+		}
+		completion_reward= {
+			
+		}
+	}
+	focus = {
+		id = SCA_federate_the_north
+		icon = focus_mexico_hat
+		x = 3
+		y = 4
+		cost = 10
+		available_if_capitulated = yes 
+		prerequisite = {
+			focus = SCA_land_for_alliance
+		} 
+		relative_position_id = SCA_counter_intelliegence_training
 		ai_will_do = { 
 			factor = 1
 		}
@@ -954,35 +1152,35 @@ focus = {
 #		}
 #	}
 #Focus for SCA_allow_the_silver_legions_to_assume_control
-	focus = {
-		id = SCA_allow_the_silver_legions_to_enter_politics
-		icon = GFX_goal_unknown
-		x = -1
-		y = 1
-		cost = 10
-		available_if_capitulated = yes
-		mutually_exclusive = { 
-			focus = SCA_allow_the_golden_legions_to_enter_politics
-		}
-		prerequisite = {
-			focus = SCA_silver_legions
-		} 
-		relative_position_id = SCA_silver_legions
-
-		ai_will_do = { 
-			factor = 1
-		}
-		completion_reward= {
-			SCA = {
-				add_popularity = {
-					ideology = communism
-					popularity = 0.2
-				}
-			}
-		}
+#	focus = {
+#		id = SCA_allow_the_silver_legions_to_enter_politics
+#		icon = GFX_goal_unknown
+#		x = -1
+#		y = 1
+#		cost = 10
+#		available_if_capitulated = yes
+#		mutually_exclusive = { 
+#			focus = SCA_allow_the_golden_legions_to_enter_politics
+#		}
+#		prerequisite = {
+#			focus = SCA_silver_legions
+#		} 
+#		relative_position_id = SCA_silver_legions
+#
+#		ai_will_do = { 
+#			factor = 1
+#		}
+#		completion_reward= {
+#			SCA = {
+#				add_popularity = {
+#					ideology = communism
+#					popularity = 0.2
+#				}
+#			}
+#		}
 		
 		
-	}	
+#	}	
 		
 	focus = {
 		id = SCA_army_effort
@@ -990,7 +1188,8 @@ focus = {
 		prerequisite = {
 				focus = SCA_nationalize_the_armed_forces
 			}
-		x = 25
+		relative_position_id = SCA_nationalize_the_armed_forces
+		x = -3
 		y = 1
 		cost = 10
 
@@ -1011,7 +1210,7 @@ focus = {
 		id = SCA_equipment_effort
 		icon = GFX_goal_generic_small_arms
 		prerequisite = { focus = SCA_army_effort }
-		x = -3
+		x = 2
 		y = 1
 		relative_position_id = SCA_army_effort
 		cost = 10
@@ -1032,7 +1231,7 @@ focus = {
 		id = SCA_Maintain_Desert_Rats_Program
 		icon = GFX_goal_generic_small_arms
 		prerequisite = { focus = SCA_army_effort }
-		x = -1
+		x = -2
 		y = 1
 		relative_position_id = SCA_army_effort
 		cost = 10
@@ -1060,7 +1259,7 @@ focus = {
 		icon = GFX_goal_generic_army_motorized
 		prerequisite = { focus = SCA_army_effort }
 		bypass = { has_tech = motorised_infantry }
-		x = 3
+		x = -4
 		y = 1
 		relative_position_id = SCA_army_effort
 		cost = 10
@@ -1073,15 +1272,24 @@ focus = {
 				bonus = 3.0
 				technology = motorised_infantry
 			}
+			add_tech_bonus = {
+				name = cat_mobile_warfare
+				bonus = 1.5
+				uses = 1
+				category = cat_mobile_warfare
+			}
+			remove_ideas = {SCA_cavalrised_army}
+			add_ideas = {SCA_motorised_army}
+
+			}
 		}
-	}
 
 	focus = {
 		id = SCA_doctrine_effort
 		icon = GFX_goal_generic_army_doctrines
 		prerequisite = { focus = SCA_army_effort }
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = SCA_army_effort
 		cost = 10
 
@@ -1101,10 +1309,10 @@ focus = {
 	focus = {
 		id = SCA_equipment_effort_2
 		icon = GFX_goal_generic_army_artillery
-		prerequisite = { focus = SCA_equipment_effort }
+		prerequisite = { focus = SCA_doctrine_effort }
 		x = 0
-		y = 2
-		relative_position_id = SCA_equipment_effort
+		y = 1
+		relative_position_id = SCA_doctrine_effort
 		cost = 10
 
 		available_if_capitulated = yes
@@ -1112,7 +1320,7 @@ focus = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = infantry_artillery_bonus
-				bonus = 1.0
+				bonus = .5
 				uses = 1
 				category = infantry_weapons
 				category = artillery
@@ -1120,12 +1328,12 @@ focus = {
 		}
 	}
 
-	focus = {
+	focus= {
 		id = SCA_mechanization_effort
 		icon = GFX_goal_generic_build_tank
 		prerequisite = { focus = SCA_motorization_effort }
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = SCA_motorization_effort
 		cost = 10
 
@@ -1138,16 +1346,51 @@ focus = {
 				uses = 1
 				category = motorized_equipment
 			}
+			add_tech_bonus = {
+				name = cat_mobile_warfare
+				ahead_reduction =2
+				uses = 1
+				category = cat_mobile_warfare
+			}
+			remove_ideas = {SCA_motorised_army}
+			add_ideas = {SCA_mechanized_army}
 		}
 	}
+	focus= {
+		id = SCA_rapid_strike_doctrine
+		icon = GFX_goal_generic_build_tank
+		prerequisite = { focus = SCA_mechanization_effort }
+		x = 1
+		y = 1
+		relative_position_id = SCA_mechanization_effort
+		cost = 10
 
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = motorized_bonus
+				ahead_reduction = 1
+				bonus = .5
+				uses = 1
+				category = motorized_equipment
+			}
+			add_tech_bonus = {
+				name = cat_mobile_warfare
+				ahead_reduction =1
+				bonus = .5
+				uses = 2
+				category = cat_mobile_warfare
+			}
+		}
+	}
 	focus = {
 		id = SCA_doctrine_effort_2
 		icon = GFX_goal_generic_army_doctrines
-		prerequisite = { focus = SCA_doctrine_effort }
+		prerequisite = { focus = SCA_equipment_effort }
 		x = 0
-		y = 2
-		relative_position_id = SCA_doctrine_effort
+		y = 1
+		relative_position_id = SCA_equipment_effort
 		cost = 10
 
 		available_if_capitulated = yes
@@ -1162,35 +1405,12 @@ focus = {
 			}
 		}
 	}
-
-	focus = {
-		id = SCA_equipment_effort_3
-		icon = GFX_goal_generic_army_artillery2
-		prerequisite = { focus = SCA_equipment_effort_2 }
-		x = 0
-		y = 2
-		relative_position_id = SCA_equipment_effort_2
-		cost = 10
-
-		available_if_capitulated = yes
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_artillery_bonus
-				ahead_reduction = 2
-				uses = 1
-				category = infantry_weapons
-				category = artillery
-			}
-		}
-	}
-
 	focus = {
 		id = SCA_armor_effort
 		icon = GFX_goal_generic_army_tanks
 		prerequisite = { focus = SCA_mechanization_effort }
-		x = 0
-		y = 2
+		x = -1
+		y = 1
 		relative_position_id = SCA_mechanization_effort
 		cost = 10
 
@@ -1200,7 +1420,28 @@ focus = {
 			add_tech_bonus = {
 				name = armor_bonus
 				bonus = 1.0
-				uses = 2
+				uses = 1
+				category = armor
+			}
+		}
+	}
+	focus = {
+		id = SCA_Italian_SPG_investments
+		icon = GFX_goal_italy_armed_cooperation
+		prerequisite = { focus = SCA_armor_effort 
+						focus = SCA_foreign_development_program}
+		x = -1
+		y = 2
+		relative_position_id = SCA_armor_effort
+		cost = 10
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 1.0
+				uses = 1
 				category = armor
 			}
 		}
@@ -1209,12 +1450,11 @@ focus = {
 	focus = {
 		id = SCA_special_forces
 		icon = GFX_goal_generic_special_forces
-		prerequisite = { focus = SCA_equipment_effort_3 }
 		prerequisite = { focus = SCA_doctrine_effort_2 }
-		prerequisite = { focus = SCA_armor_effort }
-		x = 3
+		prerequisite = { focus = SCA_equipment_effort_2}
+		x = 1
 		y = 1
-		relative_position_id = SCA_equipment_effort_3
+		relative_position_id = SCA_equipment_effort_2
 		cost = 10
 
 		available_if_capitulated = yes
@@ -1234,34 +1474,82 @@ focus = {
 			}
 		}
 	}
-	focus = {
-		id = SCA_allow_the_golden_legions_to_enter_politics
-		icon = GFX_goal_unknown
-		x = 1
+	focus= {
+		id = SCA_shock_and_awe
+		icon = GFX_goal_combined_arms
+		prerequisite = { focus = SCA_special_forces }
+		prerequisite = { focus = SCA_rapid_strike_doctrine }
+		prerequisite = { focus = SCA_CAS_effort }
+		x = 0
 		y = 1
-		cost = 5
-		available_if_capitulated = yes 
-		mutually_exclusive = { 
-			focus = SCA_allow_the_silver_legions_to_enter_politics
-		}
-		prerequisite = {
-			focus = SCA_silver_legions
-		} 
-		relative_position_id= SCA_silver_legions
-		ai_will_do = { 
-			factor = 1
-		}
+		relative_position_id = SCA_special_forces
+		cost = 10
+
+		available_if_capitulated = yes
+
 		completion_reward = {
-			SCA = {
-				add_popularity = {
-					ideology = fascism
-					popularity = 0.2
+			custom_effect_tooltip = SCA_formation_of_mech
+			hidden_effect = {
+				if = {
+					limit = {
+						has_tech = tech_recon
+					}
+					division_template = {
+						name = "Lightning"
+						priority = 2
+						division_names_group = ROM_INF_01
+						regiments = {
+							motorized_infantry = { x = 0 y = 0 }
+							motorized_infantry = { x = 0 y = 1 }
+							motorized_infantry = { x = 0 y = 2 }
+				
+		    	   		 	motorized_infantry = { x = 1 y = 0 }
+							motorized_infantry = { x = 1 y = 1 }
+							motorized_infantry = { x = 1 y = 2 }
+				
+		    	   		 	motorized_infantry = { x = 2 y = 0 }
+							light_sp_artillery_brigade = { x = 2 y = 1 }
+							light_sp_artillery_brigade = { x = 2 y = 2 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							recon = { x = 0 y = 1 }
+						}
+					}
 				}
 			}
 
-		
 		}
+
 	}
+#	focus = {
+#		id = SCA_allow_the_golden_legions_to_enter_politics
+#		icon = GFX_goal_unknown
+#		x = 1
+#		y = 1
+#		cost = 5
+#		available_if_capitulated = yes 
+#		mutually_exclusive = { 
+#			focus = SCA_allow_the_silver_legions_to_enter_politics
+#		}
+#		prerequisite = {
+#			focus = SCA_silver_legions
+#		} 
+#		relative_position_id= SCA_silver_legions
+#		ai_will_do = { 
+#			factor = 1
+#		}
+#		completion_reward = {
+#			SCA = {
+#				add_popularity = {
+#					ideology = fascism
+#					popularity = 0.2
+#				}
+#			}
+#
+#		
+#		}
+#	}
 	#focus = {
 	#	id = SCA_silver_assault_divsions_form
 	#	icon = GFX_goal_unknown
@@ -1320,7 +1608,8 @@ focus = {
 		prerequisite = {
 			focus = SCA_nationalize_the_armed_forces
 			}
-		x = 33
+			relative_position_id = SCA_nationalize_the_armed_forces
+		x = 3
 		y = 1
 		cost = 10
 		prerequisite = {
@@ -1546,7 +1835,7 @@ focus = {
 		id = SCA_CAS_effort
 		icon = GFX_goal_generic_CAS
 		prerequisite = { focus = SCA_aviation_effort_2 }
-		x = -1
+		x = -2
 		y = 1
 		relative_position_id = SCA_aviation_effort_2
 		cost = 10
@@ -1561,6 +1850,12 @@ focus = {
 				uses = 1
 				category = cas_bomber
 			}
+			add_tech_bonus = {
+				name =  air_doc_bonus
+				bonus = 1.0
+				uses = 1
+				category = air_doctrine
+			}
 		}
 	}
 
@@ -1569,7 +1864,7 @@ focus = {
 		icon = GFX_focus_rocketry
 		prerequisite = { focus = SCA_aviation_effort_2 }
 		x = 0
-		y = 2
+		y = 1
 		relative_position_id = SCA_aviation_effort_2
 		cost = 10
 
@@ -1595,12 +1890,89 @@ focus = {
 	}
 
 	focus = {
-		id = SCA_NAV_effort
+		id = SCA_NAV_aviation
 		icon = GFX_goal_generic_air_naval_bomber
-		prerequisite = { focus = SCA_aviation_effort_2 }
+		prerequisite = { focus = SCA_continue_flattop_exp }
+		x = 0
+		y = 1
+		relative_position_id = SCA_continue_flattop_exp
+		cost = 10
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = nav_bomber_bonus
+				bonus = 1.0
+				ahead_reduction = 2
+				uses = 1
+				category = naval_bomber
+			}
+		}
+	}
+	focus = {
+		id = SCA_joint_air_navy
+		icon = GFX_goal_generic_air_naval_bomber
+		prerequisite = { focus = SCA_aviation_effort }
+		prerequisite = { focus = SCA_reclaim_the_trading_ports }
+		x = 3
+		y = 1
+		cost = 10
+		relative_position_id = SCA_aviation_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = nav_bomber_bonus
+				bonus = 1.0
+				ahead_reduction = 2
+				uses = 1
+				category = naval_bomber
+			}
+		}
+	}
+	focus = {
+		id = SCA_ground_air_radar
+		icon = GFX_goal_radar
+		prerequisite = { focus = SCA_joint_air_navy }
 		x = 1
 		y = 1
-		relative_position_id = SCA_aviation_effort_2
+		relative_position_id = SCA_joint_air_navy
+		cost = 10
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = nav_bomber_bonus
+				bonus = 1.0
+				ahead_reduction = 2
+				uses = 1
+				category = naval_bomber
+			}
+		}
+	}
+		focus = {
+		id = SCA_Zero_license
+		icon = GFX_goal_zero_license
+		prerequisite = { focus = SCA_ground_air_radar}
+		x = 1
+		y = 2
+		relative_position_id = SCA_joint_air_navy
+		cost = 10
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = SCA_continue_flattop_exp
+		icon = GFX_goal_carrier
+		prerequisite = { focus = SCA_joint_air_navy }
+		x = -1
+		y = 1
+		relative_position_id = SCA_joint_air_navy
 		cost = 10
 
 		available_if_capitulated = yes
@@ -1621,7 +1993,8 @@ focus = {
 		prerequisite = {
 			focus = SCA_nationalize_the_armed_forces
 			}
-		x = 37
+		relative_position_id = SCA_nationalize_the_armed_forces
+		x = 10
 		y = 1
 		cost = 7
 
@@ -1973,7 +2346,8 @@ focus = {
 		prerequisite = {
 			focus = SCA_nationalize_the_armed_forces
 			}
-		x = 16
+			relative_position_id = SCA_nationalize_the_armed_forces
+		x = -14
 		y = 1
 		cost = 10
 		available_if_capitulated = yes
@@ -2033,7 +2407,7 @@ focus = {
 				all_owned_state = {
 					free_building_slots = {
 						building = industrial_complex
-						size < 1
+						size < 2
 						include_locked = yes
 					}					
 				}
@@ -2041,10 +2415,10 @@ focus = {
 		}
 
 		complete_tooltip = {
-			add_extra_state_shared_building_slots = 1
+			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = industrial_complex
-				level = 1
+				level = 2
 				instant_build = yes
 			}			
 		}
@@ -2054,7 +2428,7 @@ focus = {
 				limit = {
 					free_building_slots = {
 						building = industrial_complex
-						size > 0
+						size > 1
 						include_locked = yes
 					}
 					OR = {
@@ -2064,7 +2438,7 @@ focus = {
 								any_owned_state = {
 									free_building_slots = {
 										building = industrial_complex
-										size > 0
+										size > 1
 										include_locked = yes
 									}
 									is_in_home_area = yes
@@ -2073,10 +2447,10 @@ focus = {
 						}
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -2088,7 +2462,7 @@ focus = {
 		icon = GFX_goal_generic_construct_mil_factory
 		prerequisite = { focus = SCA_foreign_development_program }
 		x = 1
-		y = 1
+		y = 2
 		relative_position_id = SCA_foreign_development_program
 		cost = 10
 
@@ -2105,7 +2479,7 @@ focus = {
 				all_owned_state = {
 					free_building_slots = {
 						building = arms_factory
-						size < 1
+						size < 2
 						include_locked = yes
 					}
 				}
@@ -2113,10 +2487,10 @@ focus = {
 		}
 
 		complete_tooltip = {
-			add_extra_state_shared_building_slots = 1
+			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = arms_factory
-				level = 1
+				level = 2
 				instant_build = yes
 			}
 		}
@@ -2126,7 +2500,7 @@ focus = {
 				limit = {
 					free_building_slots = {
 						building = arms_factory
-						size > 0
+						size > 1
 						include_locked = yes
 					}
 					OR = {
@@ -2136,7 +2510,7 @@ focus = {
 								any_owned_state = {
 									free_building_slots = {
 										building = arms_factory
-										size > 0
+										size > 1
 										include_locked = yes
 									}
 									is_in_home_area = yes
@@ -2145,10 +2519,10 @@ focus = {
 						}
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -2177,28 +2551,28 @@ focus = {
 				all_owned_state = {
 					free_building_slots = {
 						building = industrial_complex
-						size < 1
+						size < 2
 						include_locked = yes
-					}
+					}					
 				}
 			}
 		}
 
 		complete_tooltip = {
-			add_extra_state_shared_building_slots = 1
+			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = industrial_complex
-				level = 1
+				level = 2
 				instant_build = yes
-			}
-		}		
+			}			
+		}
 
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
 					free_building_slots = {
 						building = industrial_complex
-						size > 0
+						size > 1
 						include_locked = yes
 					}
 					OR = {
@@ -2208,7 +2582,7 @@ focus = {
 								any_owned_state = {
 									free_building_slots = {
 										building = industrial_complex
-										size > 0
+										size > 1
 										include_locked = yes
 									}
 									is_in_home_area = yes
@@ -2217,10 +2591,10 @@ focus = {
 						}
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -2231,7 +2605,7 @@ focus = {
 		id = SCA_production_effort_2
 		icon = GFX_goal_generic_construct_mil_factory
 		prerequisite = { focus = SCA_production_effort }
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = SCA_production_effort
 		cost = 10
@@ -2249,7 +2623,7 @@ focus = {
 				all_owned_state = {
 					free_building_slots = {
 						building = arms_factory
-						size < 1
+						size < 2
 						include_locked = yes
 					}
 				}
@@ -2257,20 +2631,20 @@ focus = {
 		}
 
 		complete_tooltip = {
-			add_extra_state_shared_building_slots = 1
+			add_extra_state_shared_building_slots = 2
 			add_building_construction = {
 				type = arms_factory
-				level = 1
+				level = 2
 				instant_build = yes
 			}
-		}		
+		}
 
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
 					free_building_slots = {
 						building = arms_factory
-						size > 0
+						size > 1
 						include_locked = yes
 					}
 					OR = {
@@ -2280,7 +2654,7 @@ focus = {
 								any_owned_state = {
 									free_building_slots = {
 										building = arms_factory
-										size > 0
+										size > 1
 										include_locked = yes
 									}
 									is_in_home_area = yes
@@ -2289,10 +2663,10 @@ focus = {
 						}
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -2330,7 +2704,7 @@ focus = {
 			}
 			add_building_construction = {
 				type = infrastructure
-				level = 1
+				level = 2
 				instant_build = yes
 			}
 		}
@@ -2397,7 +2771,7 @@ focus = {
 		id = SCA_production_effort_3
 		icon = GFX_goal_generic_construct_mil_factory
 		prerequisite = { focus = SCA_production_effort_2 }
-		x = 0
+		x = 1
 		y = 1
 		relative_position_id = SCA_production_effort_2
 		cost = 10
@@ -2415,28 +2789,28 @@ focus = {
 				all_owned_state = {
 					free_building_slots = {
 						building = arms_factory
-						size < 1
+						size < 3
 						include_locked = yes
-					}					
+					}
 				}
 			}
 		}
 
 		complete_tooltip = {
-			add_extra_state_shared_building_slots = 1
+			add_extra_state_shared_building_slots = 3
 			add_building_construction = {
 				type = arms_factory
-				level = 1
+				level = 3
 				instant_build = yes
 			}
-		}		
+		}
 
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
 					free_building_slots = {
 						building = arms_factory
-						size > 0
+						size > 2
 						include_locked = yes
 					}
 					OR = {
@@ -2446,7 +2820,7 @@ focus = {
 								any_owned_state = {
 									free_building_slots = {
 										building = arms_factory
-										size > 0
+										size > 2
 										include_locked = yes
 									}
 									is_in_home_area = yes
@@ -2455,10 +2829,10 @@ focus = {
 						}
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = arms_factory
-					level = 1
+					level = 3
 					instant_build = yes
 				}
 			}
@@ -2496,7 +2870,7 @@ focus = {
 			}
 			add_building_construction = {
 				type = infrastructure
-				level = 1
+				level = 2
 				instant_build = yes
 			}
 		}
@@ -2581,7 +2955,7 @@ focus = {
 				all_owned_state = {
 					free_building_slots = {
 						building = industrial_complex
-						size < 2
+						size < 3
 						include_locked = yes
 					}
 				}
@@ -2589,10 +2963,10 @@ focus = {
 		}
 
 		complete_tooltip = {
-			add_extra_state_shared_building_slots = 2
+			add_extra_state_shared_building_slots = 3
 			add_building_construction = {
 				type = industrial_complex
-				level = 2
+				level = 3
 				instant_build = yes
 			}
 		}
@@ -2602,7 +2976,7 @@ focus = {
 				limit = {
 					free_building_slots = {
 						building = industrial_complex
-						size > 1
+						size > 2
 						include_locked = yes
 					}
 					OR = {
@@ -2612,7 +2986,7 @@ focus = {
 								any_owned_state = {
 									free_building_slots = {
 										building = industrial_complex
-										size > 1
+										size > 2
 										include_locked = yes
 									}
 									is_in_home_area = yes
@@ -2621,10 +2995,10 @@ focus = {
 						}
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}

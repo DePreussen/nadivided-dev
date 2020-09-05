@@ -96,7 +96,7 @@ ideas = {
 
 
 
-            traits = { air_strategic_bombing_3 air_tactical_bombing_2  air_air_superiority_3 }
+            traits = { strategic_bombing_3 tactical_bombing_2  air_superiority_3 }
 
             ai_will_do = {
                 factor = 1
@@ -1686,7 +1686,7 @@ ideas = {
 			}
 		}
 		
-		NAD_Bill_of_Rights {
+		NAD_Bill_of_Rights = {
 			#picture = #
 			
 			allowed_civil_war = {
@@ -1701,7 +1701,7 @@ ideas = {
 			}
 		}
 		
-		NAD_Family_Subsidies {
+		NAD_Family_Subsidies = {
 			#picture = #
 			
 			allowed_civil_war = {
@@ -1715,7 +1715,7 @@ ideas = {
 			}
 		}
 		
-		NAD_Family_Planning {
+		NAD_Family_Planning = {
 			#picture = #
 			
 			allowed_civil_war = {
@@ -1730,7 +1730,7 @@ ideas = {
 		}
 		
 		
-		NAD_Public_Healthcare {
+		NAD_Public_Healthcare = {
 			#picture = #
 			
 			allowed_civil_war = {
@@ -1746,7 +1746,7 @@ ideas = {
 			}
 		}
 		
-		NAD_Private_Healthcare {
+		NAD_Private_Healthcare = {
 			#picture = #
 			
 			allowed_civil_war = {
